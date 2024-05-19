@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plant Details</title>
+	<link rel="stylesheet" href="{% static 'styles.css' %}">
+	
+</head>
+<body>
+
+<div class="container">
+    <h3>{{ plant.name }}</h3>
+    <section class="customer-orders">
+    <p><img src="{{ plant.image.url }}" alt="{{ plant.name }}" width="400"></p>
+	<p>Description: {{ plant.description }}</p>
+    <p>Price: {{ plant.price }}</p>
+	<p>Availability: {% if plant.availability %}Yes{% else %}No{% endif %}</p>
+	
+	<br>
+	<h6><a href="{% url 'update_plant' plant.id %}" style="color:blue">Update Plant</a></h6>
+	<br>
+	
+	
+    <form method="post" action="{% url 'add_to_cart' plant.id %}">
+        {% csrf_token %}
+        <button type="submit">Order</button>
+    </form>
+	
+    </section>
+</div>
+
+</body>
+</html>
+{% endblock content %}

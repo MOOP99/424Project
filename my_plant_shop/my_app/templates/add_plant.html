@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Plant</title>
+</head>
+<body>
+					
+<div class="container">
+    <h3>Add Plant</h3>
+    <section class="customer-orders">
+<form method="post" enctype="multipart/form-data" action="{% url 'add_plant' %}" >
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Add Plant</button>
+</form>
+		
+    </section>
+</div>
+
+	
+</body>
+</html>
+
+{% endblock content %}

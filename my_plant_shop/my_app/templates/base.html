@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+	{% load static %}
+	
+	<!-- import css styles -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../static/styles.css">
+	
+	
+</head>
+<body>
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+				<li><a href=""> Welcome: {{ user.username }} </a></li>
+				<li><a href="{% url 'home' %}">Home</a></li>
+            {% else %}
+				<li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+            <li><a href="{% url 'plants' %}">Plants</a></li>
+			{% if user.is_authenticated %}
+			{% if user.username == 'admin' %}
+            <li><a href="{% url 'plant_management' %}">Plant Management</a></li>	
+			{% endif %}
+			{% endif %}
+            {% if user.is_authenticated %}
+			    <li><a href="{% url 'orders' %}">Orders</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>	
+            {% endif %}
+        </ul>
+    </nav>
+    {% block content %}{% endblock %}
+</body>
+</html>

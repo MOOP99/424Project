@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+</head>
+<body>	
+
+{% if user.is_authenticated %}
+
+<div class="container">
+    <section class="customer-orders">
+	<center>
+
+    <div class="row">
+        {% for plant in plants %}
+            <div class='col-md-6'>
+            <div class='plant-item'>
+            <h3> {{ plant.name }} </h3>          
+			<a href="{% url 'plant_details' plant.id %}">
+			<img src="{{ plant.image.url }}" alt="{{ plant.image.url }}" class='plant-image' width="200">
+			</a>
+            <div class='plant-info'>
+            <p>Price: SR {{ plant.price }} </p>
+            </div>
+            
+            </div>
+            </div>
+        {% endfor %}
+    </div>
+	</center>
+    </section>
+
+
+</div>
+	
+{% else %}
+<br>
+<h6>You must login first to access this page.</h6>
+       
+
+{% endif %}
+	
+</body>
+</html>
+
+{% endblock content %}

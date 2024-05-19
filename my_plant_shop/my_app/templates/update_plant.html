@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Plant</title>
+	<link rel="stylesheet" href="{% static 'styles.css' %}">
+		
+</head>
+<body>
+
+{% if user.username == 'admin' %}
+
+<div class="container">
+    <h3>Update Plant</h3>
+    <section class="customer-orders">
+	<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Plant</button>
+	</form>
+    </section>
+</div>
+
+{% else %}
+<br>
+<h6>Only Admin can access this page.</h6>
+       
+
+{% endif %}
+	
+</body>
+</html>
+
+{% endblock content %}

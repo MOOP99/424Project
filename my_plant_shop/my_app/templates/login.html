@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<!-- Main Content -->
+<br><br>
+<div class="container">
+    <div class="form-container">
+        <center>
+	    <div class="col-md-4">
+       		
+        <img src="../media/plants/logo.jpg" alt="plants" class="img-fluid">
+        </div>
+        <h2>Login</h2>
+		</center>
+		
+		{% if error %}
+        <p>{{ error }}</p>
+		{% endif %}
+		
+        <form method="post">
+            <div class="form-group">
+			{% csrf_token %}
+            {{ form.as_p }}
+            </div>
+			<center>
+            <button type="submit" class="btn btn-primary">Login</button>
+			<p><br><a href="{% url 'register' %}">New User? Register Now</a></p>
+			</center>
+        </form>
+		
+    </div>
+</div>
+	
+</body>
+</html>
+{% endblock content %}

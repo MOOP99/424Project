@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+	
+<br><br>
+<div class="container">
+    <div class="form-container">
+        <center>
+	    <div class="col-md-4">
+       		
+        <img src="../media/plants/logo.jpg" alt="plants" class="img-fluid">
+        </div>
+        <h2>Register</h2>
+		</center>
+		
+        <form method="post" novalidate>
+            <div class="form-group">
+			{% csrf_token %}			
+			{% for field in form %}
+			<p>
+			{% if field.errors %}
+			<ul class="errorlist">
+				{% for error in field.errors %}
+				<li>{{ error }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			{{ field.label_tag }} {{ field }}
+			</p>
+			{% endfor %}
+			
+			
+            </div>
+			<center>			
+			<input type="submit" value="Register"  class="btn btn-primary"/>
+			
+			<p><br><a href="{% url 'login' %}">Already Registered? Login</a></p>
+			</center>
+        </form>
+		
+    </div>
+</div>
+
+	
+</body>
+</html>
+
+{% endblock content %}

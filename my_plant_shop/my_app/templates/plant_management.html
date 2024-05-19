@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h3>Plant Management</h3>
+    <section class="customer-orders">
+	<h5><a href="{% url 'add_plant' %}" style="color:blue">Add Plant</a></h5>
+    </section>
+
+
+    <section class="customer-orders">
+<h4>Available Plants</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Plant Name</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Availability</th>
+            <th colspan="2" style="text-align:center;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for plant in plants %}
+        <tr>
+            <td>{{ plant.name }}</td>
+            <td>{{ plant.description }}</td>
+            <td><img src="{{ plant.image.url }}" alt="{{ plant.name }}" width="100"></td>
+            <td>{{ plant.price }}</td>
+            <td>&nbsp; &nbsp; {% if plant.availability %}Yes{% else %}No{% endif %}</td>
+			<td><a href="{% url 'update_plant' plant.id %}" class="button2">Update</a>&nbsp;&nbsp;</td>
+            <td>
+                <form method="post" action="{% url 'plant_management' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="plant_id" value="{{ plant.id }}">
+                    <input type="hidden" name="action" value="delete">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    </section>
+	</div>
+
+			
+{% endblock %}
